@@ -1,0 +1,10 @@
+# ninja log v5
+53	29469	7935799558109979	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	da36f3117600b7e5
+67	29519	7935799558131539	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	f65a4c22e20557b4
+28	29528	7935799558677941	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	3f4b27cbb92a910e
+93	29571	7935799559607302	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	d0034828d454b974
+17	29685	7935799560790982	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	dceb0b8390403125
+40	30798	7935799571796777	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	5e7f783355a95cb9
+81	30929	7935799573171776	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	922139054560f478
+1	31166	7935799575617786	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	9a3c4b62fb1b4dd5
+31167	31846	7935799582373409	C:/Users/don360/Desktop/csharp/AR Survival Shooter/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/5w35e3w3/obj/arm64-v8a/libgame.so	fefe22d3b2005799

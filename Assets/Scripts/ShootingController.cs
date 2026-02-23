@@ -14,14 +14,14 @@ namespace ARSurvivalShooter
         {
             if (GameManager.Instance.CurrentState != GameManager.GameState.Playing) return;
 
-            // Tap to shoot on mobile
-            if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+            // Tap to shoot on mobile, left-click in Editor/Simulator
+            bool tapped = (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+                          || Input.GetMouseButtonDown(0);
+
+            if (tapped && Time.time >= nextFireTime)
             {
-                if (Time.time >= nextFireTime)
-                {
-                    Shoot();
-                    nextFireTime = Time.time + fireRate;
-                }
+                Shoot();
+                nextFireTime = Time.time + fireRate;
             }
         }
 

@@ -30,7 +30,13 @@ namespace ARSurvivalShooter
 
         private void PlayClip(AudioClip clip)
         {
-            if (clip != null) sfxSource.PlayOneShot(clip);
+            if (clip == null) return;
+
+            // Guard: re-add AudioSource if it was destroyed (e.g. after scene reload)
+            if (sfxSource == null)
+                sfxSource = gameObject.AddComponent<AudioSource>();
+
+            sfxSource.PlayOneShot(clip);
         }
 
         // One method per sound event — clean API

@@ -28,6 +28,14 @@ namespace ARSurvivalShooter
             Instance = this;
         }
 
+        private void Start()
+        {
+            // Auto-start game when Gameplay scene loads.
+            // If you have an AR placement step, call StartGame() from
+            // ARPlacementController instead and remove this Start() call.
+            StartGame();
+        }
+
         public void StartGame()
         {
             CurrentState = GameState.Playing;

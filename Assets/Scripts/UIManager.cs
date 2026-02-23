@@ -55,8 +55,11 @@ namespace ARSurvivalShooter
         public void UpdateScore(int score) =>
             scoreText.text = $"Score: {score}";
 
-        public void UpdateTimer(float time) =>
-            timerText.text = $"{Mathf.CeilToInt(time)}s";
+        public void UpdateTimer(float time)
+        {
+            int t = Mathf.Max(0, Mathf.CeilToInt(time));
+            timerText.text = $"{t / 60:00}:{t % 60:00}";
+        }
 
         public void ShowGameOver(int score, int kills, float time)
         {

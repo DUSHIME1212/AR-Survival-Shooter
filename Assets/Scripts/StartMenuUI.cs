@@ -7,6 +7,7 @@ namespace ARSurvivalShooter
 {
     public class StartMenuUI : MonoBehaviour
     {
+        [SerializeField] private GameObject startMenuPanel;
         [SerializeField] private GameObject leaderboardPanel;
         [SerializeField] private TMP_Dropdown difficultyDropdown;
 
@@ -19,8 +20,15 @@ namespace ARSurvivalShooter
 
         public void OnLeaderboardPressed()
         {
+            startMenuPanel.SetActive(false);
             leaderboardPanel.SetActive(true);
-            LeaderboardUI.Instance.Refresh();
+            leaderboardPanel.GetComponent<LeaderboardUI>().Refresh();
+        }
+
+        public void OnBackPressed()
+        {
+            leaderboardPanel.SetActive(false);
+            startMenuPanel.SetActive(true);
         }
     }
 }
