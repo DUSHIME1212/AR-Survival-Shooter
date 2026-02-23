@@ -20,19 +20,35 @@ namespace ARSurvivalShooter
 
         private void Awake()
         {
-            if (Instance != null) { Destroy(gameObject); return; }
+            // Use ReferenceEquals to detect a truly non-null C# reference.
+            // Unity's overloaded != null returns false for *destroyed* objects,
+            // so a plain "Instance != null" check can miss a stale destroyed ref.
+            if (!ReferenceEquals(Instance, null) && Instance != this)
+            {
+                Destroy(gameObject);
+                return;
+            }
+
             Instance = this;
-            DontDestroyOnLoad(gameObject); // persists across scenes
+            DontDestroyOnLoad(gameObject);
 
             sfxSource = gameObject.AddComponent<AudioSource>();
             sfxSource.playOnAwake = false;
         }
 
+        private void OnDestroy()
+        {
+            // Clear the static reference when this object is destroyed
+            // so callers get a proper null instead of a stale destroyed ref.
+            if (ReferenceEquals(Instance, this))
+                Instance = null;
+        }
+
         private void PlayClip(AudioClip clip)
         {
-            if (clip == null) return;
+            // Guard: this instance may have been destroyed between frames
+            if (clip == null || this == null) return;
 
-            // Guard: re-add AudioSource if it was destroyed (e.g. after scene reload)
             if (sfxSource == null)
                 sfxSource = gameObject.AddComponent<AudioSource>();
 

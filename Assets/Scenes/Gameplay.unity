@@ -1594,8 +1594,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663678a6ca869014ba85ff4fbce95e17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  meleeEnemyPrefab: {fileID: 0}
-  shooterEnemyPrefab: {fileID: 0}
+  meleeEnemyPrefab: {fileID: -5237507269639497505, guid: 5c814941907ddaa4583da09153ecaacc,
+    type: 3}
+  shooterEnemyPrefab: {fileID: 2658257206656676342, guid: b9667dcdadce6b047a9060519e3f1207,
+    type: 3}
   spawnInterval: 3
   spawnRadius: 2
 --- !u!1 &843683130

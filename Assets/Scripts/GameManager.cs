@@ -66,11 +66,22 @@ namespace ARSurvivalShooter
         {
             if (CurrentState == GameState.GameOver) return;
             CurrentState = GameState.GameOver;
-            EnemySpawner.Instance.StopSpawning();
-            EnemySpawner.Instance.DestroyAllEnemies();
-            LeaderboardManager.Instance.SaveSession(score, enemiesKilled, gameDuration - timeRemaining);
-            OnGameOver?.Invoke(score, enemiesKilled, gameDuration - timeRemaining);
-            UIManager.Instance.ShowGameOver(score, enemiesKilled, gameDuration - timeRemaining);
+
+            if (EnemySpawner.Instance != null)
+            {
+                EnemySpawner.Instance.StopSpawning();
+                EnemySpawner.Instance.DestroyAllEnemies();
+            }
+
+            float timeSurvived = gameDuration - timeRemaining;
+
+            if (LeaderboardManager.Instance != null)
+                LeaderboardManager.Instance.SaveSession(score, enemiesKilled, timeSurvived);
+
+            OnGameOver?.Invoke(score, enemiesKilled, timeSurvived);
+
+            if (UIManager.Instance != null)
+                UIManager.Instance.ShowGameOver(score, enemiesKilled, timeSurvived);
         }
     }
 }
