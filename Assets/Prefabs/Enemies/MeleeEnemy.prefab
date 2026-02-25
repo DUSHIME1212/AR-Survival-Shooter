@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 312513722504638912}
   - component: {fileID: -271769076275778887}
   - component: {fileID: -4760245800875831194}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: MeleeEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ CapsuleCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6dd48592568d1b4d99f35e72c4fea08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ARSurvivalShooter.MeleeEnemy
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: 650e3e04c3fa0d846ad4afacf76551c5, type: 2}
 --- !u!54 &-4760245800875831194
 Rigidbody:
   m_ObjectHideFlags: 0

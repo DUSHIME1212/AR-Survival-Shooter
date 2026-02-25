@@ -25,6 +25,13 @@ namespace ARSurvivalShooter
             player = Camera.main.transform;
             currentHealth = data.maxHealth;
             
+            // Auto-assign tag and layer
+            gameObject.tag = "Enemy";
+            int characterLayer = LayerMask.NameToLayer("Character");
+            int enemyLayer = LayerMask.NameToLayer("Enemy");
+            if (characterLayer != -1) gameObject.layer = characterLayer;
+            else if (enemyLayer != -1) gameObject.layer = enemyLayer;
+
             // Apply scale
             float finalScale = data.baseScale * GameSettings.Instance.globalEnemyScale;
             transform.localScale = Vector3.one * finalScale;
@@ -54,6 +61,7 @@ namespace ARSurvivalShooter
 
         protected virtual void Die()
         {
+            Debug.Log($"[EnemyBase] {gameObject.name} died! Awarding {data.scoreValue} points.");
             GameManager.Instance.AddScore(data.scoreValue);
             EnemySpawner.Instance.ReturnEnemy(this); // return to enemy pool
         }

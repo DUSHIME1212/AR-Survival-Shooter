@@ -12,6 +12,16 @@ namespace ARSurvivalShooter
         [SerializeField] private int maxHealth = 100;
         private int currentHealth;
 
+        private void Awake()
+        {
+            // Auto-assign tag and layer
+            gameObject.tag = "Player";
+            int characterLayer = LayerMask.NameToLayer("Character");
+            int playerLayer = LayerMask.NameToLayer("Player");
+            if (characterLayer != -1) gameObject.layer = characterLayer;
+            else if (playerLayer != -1) gameObject.layer = playerLayer;
+        }
+
         private void OnEnable()
         {
             currentHealth = maxHealth;

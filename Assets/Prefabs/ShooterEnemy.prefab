@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3622046385900564445}
   - component: {fileID: 813974377882185819}
   - component: {fileID: 4829809843743868940}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4986730962032242161}
-  m_Layer: 5
+  m_Layer: 16
   m_Name: ShooterEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}

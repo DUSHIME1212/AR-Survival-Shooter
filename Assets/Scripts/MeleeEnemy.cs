@@ -22,7 +22,16 @@ namespace ARSurvivalShooter
         protected override void Attack()
         {
             AudioManager.Instance.PlayMeleeAttack();
-            player.GetComponent<PlayerHealth>().TakeDamage(data.attackDamage);
+            var health = player.GetComponentInParent<PlayerHealth>();
+            if (health != null)
+            {
+                health.TakeDamage(data.attackDamage);
+                Debug.Log($"[MeleeEnemy] Attacked player! Dealing {data.attackDamage} damage.");
+            }
+            else
+            {
+                Debug.LogWarning($"[MeleeEnemy] Could not find PlayerHealth on {player.name} or parents!");
+            }
             attackCooldownTimer = data.attackCooldown;
         }
     }

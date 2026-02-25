@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7033432698035469942}
-  m_Layer: 5
+  m_Layer: 16
   m_Name: 'MeleeEnemy '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 7435161646028773720}
   - component: {fileID: 763058184187090117}
   - component: {fileID: 3773390108518888453}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}

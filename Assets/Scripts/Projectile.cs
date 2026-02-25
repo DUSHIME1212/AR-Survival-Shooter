@@ -14,37 +14,74 @@ namespace ARSurvivalShooter
         private Rigidbody rb;
         private float timer;
 
-        private void Awake() => rb = GetComponent<Rigidbody>();
+        private void Awake()
+        {
+            rb = GetComponent<Rigidbody>();
+            
+            // Auto-assign tag and layer
+            gameObject.tag = "Projectile";
+            int layer = LayerMask.NameToLayer("Projectile");
+            if (layer != -1) gameObject.layer = layer;
+        }
 
         private void OnEnable()
         {
             // Reset state when pulled from pool
-            rb.linearVelocity = Vector3.zero;
-            rb.angularVelocity = Vector3.zero;
             timer = 0f;
-            // Removed velocity application here to use transform movement instead
+            
+            // Configure Rigidbody for straight movement
+            rb.useGravity = false;
+            rb.isKinematic = false;
+            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+            
+            // Ensure no damping so bullets don't slow down
+            rb.linearDamping = 0f;
+            rb.angularDamping = 0f;
+            
+            // Set velocity in the forward direction
+            rb.linearVelocity = transform.forward * speed;
+            rb.angularVelocity = Vector3.zero;
+
+            // Optional: Ensure bullet is on a specific layer if needed
+            gameObject.layer = LayerMask.NameToLayer("Projectile"); 
+            Debug.Log($"[Projectile] Bullet spawned/reset. Direction: {transform.forward}");
         }
 
         private void Update()
         {
-            // Move forward every frame
-            transform.Translate(Vector3.forward * speed * Time.deltaTime);
-
             timer += Time.deltaTime;
             if (timer >= lifetime) ReturnToPool();
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (isPlayerBullet && other.TryGetComponent<EnemyBase>(out var enemy))
+            if (isPlayerBullet)
             {
-                enemy.TakeDamage(damage);
-                ReturnToPool();
+                var enemy = other.GetComponentInParent<EnemyBase>();
+                if (enemy != null)
+                {
+                    Debug.Log($"[Projectile] Hit enemy: {other.gameObject.name}! Dealing {damage} damage.");
+                    enemy.TakeDamage(damage);
+                    ReturnToPool();
+                }
+                else
+                {
+                    Debug.Log($"[Projectile] Player bullet hit non-enemy: {other.gameObject.name} on layer {LayerMask.LayerToName(other.gameObject.layer)}");
+                }
             }
-            else if (!isPlayerBullet && other.TryGetComponent<PlayerHealth>(out var player))
+            else
             {
-                player.TakeDamage(damage);
-                ReturnToPool();
+                var playerHealth = other.GetComponentInParent<PlayerHealth>();
+                if (playerHealth != null)
+                {
+                    Debug.Log($"[Projectile] Enemy bullet hit player! Dealing {damage} damage.");
+                    playerHealth.TakeDamage(damage);
+                    ReturnToPool();
+                }
+                else
+                {
+                    Debug.Log($"[Projectile] Enemy bullet hit non-player: {other.gameObject.name} on layer {LayerMask.LayerToName(other.gameObject.layer)}");
+                }
             }
         }
 
