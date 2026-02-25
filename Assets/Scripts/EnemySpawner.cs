@@ -41,6 +41,11 @@ namespace ARSurvivalShooter
 
         private void SpawnEnemy()
         {
+            if (meleeEnemyPrefab == null || shooterEnemyPrefab == null)
+            {
+                return;
+            }
+
             // Spawn on random point around the game world center at plane level
             Vector3 randomOffset = new Vector3(
                 Random.Range(-spawnRadius, spawnRadius), 0,

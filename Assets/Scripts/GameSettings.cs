@@ -9,6 +9,7 @@ namespace ARSurvivalShooter
 
         public enum Difficulty { Easy, Hard }
         public Difficulty CurrentDifficulty { get; private set; }
+        public float globalEnemyScale = 1f;
 
         private void Awake()
         {
@@ -20,6 +21,11 @@ namespace ARSurvivalShooter
         public void SetDifficulty(int index)
         {
             CurrentDifficulty = (Difficulty)index;
+        }
+
+        public void SetGlobalEnemyScale(float scale)
+        {
+            globalEnemyScale = scale;
         }
 
         public float GetSpawnInterval() => CurrentDifficulty == Difficulty.Easy ? 3f : 1.5f;

@@ -22,11 +22,14 @@ namespace ARSurvivalShooter
             rb.linearVelocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
             timer = 0f;
-            rb.linearVelocity = transform.forward * speed;
+            // Removed velocity application here to use transform movement instead
         }
 
         private void Update()
         {
+            // Move forward every frame
+            transform.Translate(Vector3.forward * speed * Time.deltaTime);
+
             timer += Time.deltaTime;
             if (timer >= lifetime) ReturnToPool();
         }

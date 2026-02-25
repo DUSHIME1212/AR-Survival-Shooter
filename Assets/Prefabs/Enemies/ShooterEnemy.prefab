@@ -81,7 +81,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98a20c87928b6f74bbcc9bfed325fc12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ARSurvivalShooter.ShooterEnemy
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: 650e3e04c3fa0d846ad4afacf76551c5, type: 2}
   firePoint: {fileID: 7539365344793340482}
 --- !u!1 &5882328617470774497
 GameObject:

@@ -15,8 +15,20 @@ namespace ARSurvivalShooter
 
         protected virtual void Start()
         {
+            if (data == null)
+            {
+                Debug.LogError($"[EnemyBase] {gameObject.name} is missing EnemyData! Please assign it in the inspector.");
+                enabled = false;
+                return;
+            }
+
             player = Camera.main.transform;
             currentHealth = data.maxHealth;
+            
+            // Apply scale
+            float finalScale = data.baseScale * GameSettings.Instance.globalEnemyScale;
+            transform.localScale = Vector3.one * finalScale;
+
             AudioManager.Instance.PlayEnemySpawn();
         }
 
