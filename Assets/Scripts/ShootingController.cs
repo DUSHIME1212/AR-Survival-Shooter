@@ -27,8 +27,11 @@ namespace ARSurvivalShooter
 
         private void Shoot()
         {
-            AudioManager.Instance.PlayPlayerShoot();
-            GameObject bullet = ObjectPoolManager.Instance.GetPlayerBullet(firePoint.position, firePoint.rotation);
+            if (AudioManager.Instance != null)
+                AudioManager.Instance.PlayPlayerShoot();
+
+            if (ObjectPoolManager.Instance != null)
+                ObjectPoolManager.Instance.GetPlayerBullet(firePoint.position, firePoint.rotation);
             // Bullet's OnEnable handles velocity application
         }
     }

@@ -15,10 +15,30 @@ namespace ARSurvivalShooter
         [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private GameObject placementPanel; // "Tap to place" UI
 
+        [Header("Buttons")]
+        [SerializeField] private Button placeButton;
+
         [Header("HUD Elements")]
         [SerializeField] private Slider healthBar;
         [SerializeField] private TMP_Text scoreText;
         [SerializeField] private TMP_Text timerText;
+
+        private void Start()
+        {
+            // Ensure placement panel is active and others are hidden
+            placementPanel.SetActive(true);
+            hudPanel.SetActive(false);
+            gameOverPanel.SetActive(false);
+
+            // Programmatically link the button to the placement logic
+            if (placeButton != null)
+            {
+                placeButton.onClick.AddListener(() => {
+                    if (ARPlacementController.Instance != null)
+                        ARPlacementController.Instance.PlaceGame();
+                });
+            }
+        }
 
         [Header("Game Over Elements")]
         [SerializeField] private TMP_Text finalScoreText;

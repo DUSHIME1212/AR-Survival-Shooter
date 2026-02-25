@@ -50,9 +50,13 @@ namespace ARSurvivalShooter
             if (clip == null || this == null) return;
 
             if (sfxSource == null)
-                sfxSource = gameObject.AddComponent<AudioSource>();
+            {
+                sfxSource = GetComponent<AudioSource>();
+                if (sfxSource == null) sfxSource = gameObject.AddComponent<AudioSource>();
+            }
 
-            sfxSource.PlayOneShot(clip);
+            if (sfxSource != null)
+                sfxSource.PlayOneShot(clip);
         }
 
         // One method per sound event — clean API

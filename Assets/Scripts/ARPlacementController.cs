@@ -8,6 +8,8 @@ namespace ARSurvivalShooter
 {
     public class ARPlacementController : MonoBehaviour
     {
+        public static ARPlacementController Instance { get; private set; }
+
         [SerializeField] private GameObject gameWorldPrefab;
         [SerializeField] private ARRaycastManager raycastManager;
         [SerializeField] private ARPlaneManager planeManager;
@@ -16,6 +18,12 @@ namespace ARSurvivalShooter
         private GameObject spawnedGameWorld;
         private List<ARRaycastHit> hits = new List<ARRaycastHit>();
         private bool gamePlaced = false;
+
+        private void Awake()
+        {
+            if (Instance != null) { Destroy(gameObject); return; }
+            Instance = this;
+        }
 
         private void Update()
         {

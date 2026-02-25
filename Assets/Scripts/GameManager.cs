@@ -30,10 +30,9 @@ namespace ARSurvivalShooter
 
         private void Start()
         {
-            // Auto-start game when Gameplay scene loads.
-            // If you have an AR placement step, call StartGame() from
-            // ARPlacementController instead and remove this Start() call.
-            StartGame();
+            // Auto-start disabled in favor of AR placement.
+            // StartGame() will now be called from ARPlacementController.PlaceGame().
+            // StartGame(); 
         }
 
         public void StartGame()
