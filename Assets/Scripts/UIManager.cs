@@ -14,6 +14,7 @@ namespace ARSurvivalShooter
         [SerializeField] private GameObject hudPanel;
         [SerializeField] private GameObject gameOverPanel;
         [SerializeField] private GameObject placementPanel; // "Tap to place" UI
+        [SerializeField] private GameObject crosshair; // NEW: The target reticle
 
         [Header("Buttons")]
         [SerializeField] private Button placeButton;
@@ -29,6 +30,7 @@ namespace ARSurvivalShooter
             placementPanel.SetActive(true);
             hudPanel.SetActive(false);
             gameOverPanel.SetActive(false);
+            if (crosshair != null) crosshair.SetActive(false);
 
             // Programmatically link the button to the placement logic
             if (placeButton != null)
@@ -67,6 +69,7 @@ namespace ARSurvivalShooter
         {
             placementPanel.SetActive(false);
             hudPanel.SetActive(true);
+            if (crosshair != null) crosshair.SetActive(true);
         }
 
         public void UpdateHealth(int current, int max) =>
@@ -84,6 +87,7 @@ namespace ARSurvivalShooter
         public void ShowGameOver(int score, int kills, float time)
         {
             hudPanel.SetActive(false);
+            if (crosshair != null) crosshair.SetActive(false);
             gameOverPanel.SetActive(true);
             finalScoreText.text = $"Score: {score}";
             enemiesKilledText.text = $"Enemies: {kills}";

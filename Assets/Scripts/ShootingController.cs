@@ -49,43 +49,23 @@ namespace ARSurvivalShooter
                 // We should only exclude the "Player" specifically.
 
                 Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-                Vector3 targetPoint;
                 
                 if (Physics.Raycast(ray, out RaycastHit hit, 100f, mask))
                 {
-                    targetPoint = hit.point;
                     Debug.Log($"[ShootingController] Raycast hit: {hit.collider.gameObject.name} on layer {LayerMask.LayerToName(hit.collider.gameObject.layer)}");
+                    
+                    // Apply damage if it's an enemy
+                    EnemyBase enemy = hit.collider.GetComponentInParent<EnemyBase>();
+                    if (enemy != null)
+                    {
+                        // You might want to get damage from a variable, but for now we'll use a default or 1
+                        enemy.TakeDamage(1); 
+                        Debug.Log("[ShootingController] Enemy hit! Applied 1 damage.");
+                    }
                 }
                 else
                 {
-                    targetPoint = ray.GetPoint(50f);
-                    Debug.Log("[ShootingController] Raycast hit nothing, targeting point 50m ahead.");
-                }
-
-                if (firePoint == null)
-                {
-                    Debug.LogError("[ShootingController] FirePoint is NULL! Please assign it in the Inspector.");
-                    return;
-                }
-
-                // Calculate direction to target
-                Vector3 direction = (targetPoint - firePoint.position).normalized;
-                Quaternion bulletRotation = Quaternion.LookRotation(direction);
-
-                if (ObjectPoolManager.Instance == null)
-                {
-                    Debug.LogError("[ShootingController] ObjectPoolManager instance is NULL!");
-                    return;
-                }
-
-                GameObject bullet = ObjectPoolManager.Instance.GetPlayerBullet(firePoint.position, bulletRotation);
-                if (bullet != null)
-                {
-                    Debug.Log($"[ShootingController] SUCCESSFULLY fired bullet: {bullet.name} from {firePoint.position} towards {targetPoint}");
-                }
-                else
-                {
-                    Debug.LogError("[ShootingController] FAILED to get bullet from pool! Check if the prefab is assigned in the ObjectPoolManager.");
+                    Debug.Log("[ShootingController] Raycast hit nothing.");
                 }
             }
         }
